@@ -88,8 +88,7 @@ public class AddTaskActivity extends AppCompatActivity {
         Task newTask = new Task(id, title, date, desc, false);
         db.addTask(newTask);
 
-        // Jadwalkan notifikasi individual untuk tugas baru ini
-        DeadlineReceiver.scheduleTaskNotifications(this, newTask);
+        // Tidak ada lagi penjadwalan di sini. Notifikasi ditangani saat DeadlineActivity dibuka.
 
         Toast.makeText(this, "Tugas berhasil ditambahkan", Toast.LENGTH_SHORT).show();
 

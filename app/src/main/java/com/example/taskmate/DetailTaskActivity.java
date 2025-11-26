@@ -72,8 +72,8 @@ public class DetailTaskActivity extends AppCompatActivity {
         if (selectedTask != null) {
             db.deleteTask(taskId);
             
-            // Batalkan semua alarm terjadwal untuk tugas ini
-            DeadlineReceiver.cancelTaskNotifications(this, taskId);
+            // Bersihkan status notifikasi yang tersimpan untuk tugas ini
+            TaskNotifier.clearNotificationStateForTask(this, taskId);
 
             Toast.makeText(this, "Tugas berhasil dihapus.", Toast.LENGTH_SHORT).show();
             finish();

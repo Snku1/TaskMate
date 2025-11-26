@@ -2,12 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Izin yang diperlukan -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Izin yang diperlukan disederhanakan -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -33,29 +30,7 @@
         <activity android:name=".DetailTaskActivity" android:exported="false" />
         <activity android:name=".DeadlineActivity" android:exported="false" />
 
-        <!--
-         BootReceiver dinonaktifkan untuk menghindari duplikasi.
-         DeadlineReceiver sudah menangani aksi BOOT_COMPLETED.
-        -->
-        <receiver
-            android:name=".BootReceiver"
-            android:enabled="false"
-            android:exported="false"
-            tools:ignore="DuplicateReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <!-- Receiver utama untuk menangani semua notifikasi dan alarm -->
-        <receiver
-            android:name=".DeadlineReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+        <!-- Semua Receiver dan Service dihapus karena tidak digunakan lagi -->
 
     </application>
 

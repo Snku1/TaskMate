@@ -3,7 +3,6 @@ package com.example.taskmate;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,15 +13,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class DeadlineActivity extends AppCompatActivity {
-
-    private static final String TAG = "DeadlineActivity";
 
     private RecyclerView recyclerUncompleted, recyclerCompleted;
     private DeadlineTaskAdapter uncompletedAdapter, completedAdapter;
@@ -47,6 +40,7 @@ public class DeadlineActivity extends AppCompatActivity {
         super.onResume();
         loadData();
         setActiveMenu(menuDaftarTugas);
+        TaskNotifier.checkAndShowNotifications(this);
     }
 
     private void initViews() {
@@ -124,7 +118,7 @@ public class DeadlineActivity extends AppCompatActivity {
 
     private void markTaskAsCompleted(Task task) {
         db.toggleTaskStatus(task.getId(), true);
-        DeadlineReceiver.cancelTaskNotifications(this, task.getId());
+        TaskNotifier.clearNotificationStateForTask(this, task.getId());
         Toast.makeText(this, "Tugas '" + task.getTitle() + "' selesai", Toast.LENGTH_SHORT).show();
         loadData();
     }
